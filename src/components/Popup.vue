@@ -90,7 +90,7 @@ export default {
                         <input class='Titleinput' v-model="Title" type="text" name="Title" id="title">
                     </div>
 
-                    <selectField_category @GetData="GetCategory" />
+                    <selectField_category :category-list="Todo_LocalData.categories" @GetData="GetCategory" />
                 </div>
                 <div class="row ">
                     <div class="Decription_Input" style="color:black; display: inline-flex; flex-direction: column;">

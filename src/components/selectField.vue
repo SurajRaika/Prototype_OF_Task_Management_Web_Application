@@ -1,10 +1,12 @@
 
 <script>
 export default {
-
+props:{
+    categoryList:Array
+},
     data() {
         return {
-            categories: ["John", "Jane", "Joe", "Mary", "Mike", "Sue", "Bill", "Kate", "Tom", "Jerry"],
+            categories: this.categoryList,
             Text: '',
             ShowSuggestion: false
         }
