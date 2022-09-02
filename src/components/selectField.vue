@@ -14,7 +14,7 @@ props:{
     methods: {
         Suggestion_sort_based_on_input() {
             var array = [];
-            for (let i = 0; i < this.categories.length; i++) {
+            for (let i = this.categories.length - 1; i >=0 ; i--) {
 
                 const element = this.categories[i];
                 if (element.toLowerCase().includes(this.Text.toLowerCase())) {
@@ -85,7 +85,8 @@ input {
     position: absolute;
     z-index: 1;
     width: 100%;
-    height: calc(3 * var(--form-input-height));
+    height: min-content;
+    max-height: calc(3 * var(--form-input-height));
     overflow-y: scroll;
     overflow-x: hidden;
     border-radius: 0.1rem;

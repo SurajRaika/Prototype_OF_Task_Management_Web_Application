@@ -5,12 +5,11 @@ export default {
     data() {
         return {
             Todo_LocalData: { categories: [], TodoList: [] },
-            categories: ["John", "Jane", "Joe", "Mary", "Mike", "Sue", "Bill", "Kate", "Tom", "Jerry"],
             category: '',
             Title: '',
             description: '',
-            Expire_time: new Date(),
-            date: new Date()
+            Expire_time: '',
+            date: ''
         }
     },
     components: {
@@ -31,14 +30,15 @@ export default {
         }
         ,
         AddTask() {
-            console.log("addtask ", this.category & this.Title & this.Expire_time & this.date);
-            if (true) {
+            if ( typeof(this.category)=="string" & typeof(this.Title)=="string" & typeof(this.Expire_time)=="string" & typeof(this.date)=="string") {
                 var Task = {
                     category: this.category,
                     Title: this.Title,
                     description: this.description,
                     Start_time: this.Expire_time,
-                    end_time: (new Date(`${this.date} ${this.Expire_time}`)).getTime()
+                    end_time: (new Date(`${this.date} ${this.Expire_time}`)).getTime(),
+                    completed:false,
+                    timeout:false
                 };
 
                 this.Todo_LocalData.TodoList.push(Task)
@@ -74,7 +74,6 @@ export default {
 
     mounted() {
         this.Todo_LocalData = JSON.parse(localStorage.getItem('Todo_LocalData')) || { categories: [], TodoList: [] }
-        console.log(this.Todo_LocalData);
     }
 
 }
@@ -90,7 +89,7 @@ export default {
                         <input class='Titleinput' v-model="Title" type="text" name="Title" id="title">
                     </div>
 
-                    <selectField_category :category-list="Todo_LocalData.categories" @GetData="GetCategory" />
+                    <selectField_category :category-list="Todo_LocalData.categories.reverse()" @GetData="GetCategory" />
                 </div>
                 <div class="row ">
                     <div class="Decription_Input" style="color:black; display: inline-flex; flex-direction: column;">

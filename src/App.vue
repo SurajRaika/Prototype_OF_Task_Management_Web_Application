@@ -7,11 +7,22 @@ export default {
 
   data() {
     return {
-      Popup:false
+      Popup:false,
+      Rerender:false
     }
   },
   components: {
     navbar,PopupButton,Popup
+  },
+  computed: {
+   
+  },
+  watch:{
+    Popup(newvalue,old){
+      if (old & !newvalue) {
+        this.Rerender=!this.Rerender
+      }
+    }
   }
 }
 </script>
@@ -19,11 +30,11 @@ export default {
 <template>
   <div class="app">
       <navbar></navbar>
-      <RouterView />
-      <PopupButton  @GetDataClick="Popup = true" />
+      <RouterView :key="Rerender"/>
+      <PopupButton  @click.native="Popup = true" />
       <Popup v-model="Popup"/>
       
-
+      
   </div>
 </template>
 <style>
